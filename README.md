@@ -8,6 +8,9 @@ Not all endpoints implemented. Only get of tax rules and get congestion tax.
 
 Once you run `docker-compose up`, surf to http://localhost:8000/swagger/index.html
 
+
+Input:
+
 ```
 {
   "vehicleType": "CAR",
@@ -34,11 +37,15 @@ Once you run `docker-compose up`, surf to http://localhost:8000/swagger/index.ht
 And got the follwing response: 
 ```
 {
-  "01/14/2013": "0",
-  "01/15/2013": "0",
-  "02/07/2013": "21",
-  "02/08/2013": "39",
-  "03/26/2013": "8",
-  "03/28/2013": "8"
+  "vehicleType": "CAR",
+  "taxes": {
+    "2013-01-14T00:00:00": 0,
+    "2013-01-15T00:00:00": 0,
+    "2013-02-07T00:00:00": 21,
+    "2013-02-08T00:00:00": 60,
+    "2013-03-26T00:00:00": 8,
+    "2013-03-28T00:00:00": 0
+  },
+  "total": 89
 }
 ```
