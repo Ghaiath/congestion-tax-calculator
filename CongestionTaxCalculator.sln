@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTaxCalculator.Application", "src\CongestionTaxCalculator.Application\CongestionTaxCalculator.Application.csproj", "{9E3F9EAB-998D-4D05-B033-84F1BF5E056F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTaxCalculator.Infrastructure", "src\CongestionTaxCalculator.Infrastructure\CongestionTaxCalculator.Infrastructure.csproj", "{F8608071-E2D1-4C7F-A60D-C476E00EBA0F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTaxCalculator.Domain", "src\CongestionTaxCalculator.Domain\CongestionTaxCalculator.Domain.csproj", "{EB5A29A1-EC84-4214-88A7-448875FFD732}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CongestionTaxCalculator.Web", "src\CongestionTaxCalculator.Web\CongestionTaxCalculator.Web.csproj", "{2B645BB7-3581-41C1-B2A9-44C4FA1B3286}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A898853F-3AB7-4D81-A5F2-B7F6F641F491}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{86713F99-9B8A-497D-A928-BF0E846B49DF}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		questions.md = questions.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E3F9EAB-998D-4D05-B033-84F1BF5E056F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E3F9EAB-998D-4D05-B033-84F1BF5E056F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E3F9EAB-998D-4D05-B033-84F1BF5E056F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E3F9EAB-998D-4D05-B033-84F1BF5E056F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8608071-E2D1-4C7F-A60D-C476E00EBA0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8608071-E2D1-4C7F-A60D-C476E00EBA0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8608071-E2D1-4C7F-A60D-C476E00EBA0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8608071-E2D1-4C7F-A60D-C476E00EBA0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB5A29A1-EC84-4214-88A7-448875FFD732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB5A29A1-EC84-4214-88A7-448875FFD732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB5A29A1-EC84-4214-88A7-448875FFD732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB5A29A1-EC84-4214-88A7-448875FFD732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B645BB7-3581-41C1-B2A9-44C4FA1B3286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B645BB7-3581-41C1-B2A9-44C4FA1B3286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B645BB7-3581-41C1-B2A9-44C4FA1B3286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B645BB7-3581-41C1-B2A9-44C4FA1B3286}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9E3F9EAB-998D-4D05-B033-84F1BF5E056F} = {A898853F-3AB7-4D81-A5F2-B7F6F641F491}
+		{F8608071-E2D1-4C7F-A60D-C476E00EBA0F} = {A898853F-3AB7-4D81-A5F2-B7F6F641F491}
+		{EB5A29A1-EC84-4214-88A7-448875FFD732} = {A898853F-3AB7-4D81-A5F2-B7F6F641F491}
+		{2B645BB7-3581-41C1-B2A9-44C4FA1B3286} = {A898853F-3AB7-4D81-A5F2-B7F6F641F491}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87DEA158-CE22-4759-9C8C-C31F747CED41}
+	EndGlobalSection
+EndGlobal
