@@ -1,7 +1,7 @@
 # Congestion Tax Calculator
 
-Welcome the Volvo Cars Congestion Tax Calculator assignment.
+Run docker-compose up to start the services
 
-This repository contains a developer [assignment](ASSIGNMENT.md) used as a basis for candidate intervew and evaluation.
+This will seed the MongoDB with the initial data.
 
-Clone this repository to get started. Due to a number of reasons, not least privacy, you will be asked to zip your solution and mail it in, instead of submitting a pull-request.
+Not all endpoints implemented. Only get of tax rules.
