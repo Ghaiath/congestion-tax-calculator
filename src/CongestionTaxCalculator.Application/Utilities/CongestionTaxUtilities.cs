@@ -51,6 +51,6 @@ public static class CongestionTaxUtilities
 
     var tollFreeDatesForYear = GetTollFreeDatesForYear(year);
 
-    return tollFreeDatesForYear.Contains(dateTime);
+    return tollFreeDatesForYear.Contains(dateTime.Date);
   }
 }

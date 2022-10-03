@@ -35,6 +35,6 @@ public class CongestionTaxController : ControllerBase
     }
     var response = await _mediator.Send(new GetCongestionTaxQuery(getCongestionTaxQuery.VehicleType, dates.ToArray()));
 
-    return Ok(response.ToDictionary(x => x.Item1.ToString(), x => x.Item2.ToString()));
+    return Ok(response);
   }
 }

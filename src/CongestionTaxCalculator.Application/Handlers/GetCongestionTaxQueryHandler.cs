@@ -1,63 +1,57 @@
-﻿using CongestionTaxCalculator.Application.Queries;
+﻿using CongestionTaxCalculator.Application.Extensions;
+using CongestionTaxCalculator.Application.Queries;
+using CongestionTaxCalculator.Application.Responses;
 using CongestionTaxCalculator.Application.Utilities;
 using CongestionTaxCalculator.Domain.Enums;
 using CongestionTaxCalculator.Infrastructure;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 
 namespace CongestionTaxCalculator.Application.Handlers;
 
-public class GetCongestionTaxQueryHandler : IRequestHandler<GetCongestionTaxQuery, List<(DateOnly, int)>>
+public class GetCongestionTaxQueryHandler : IRequestHandler<GetCongestionTaxQuery, GetCongestionTaxResponse>
 {
   protected readonly CongestionTaxCalculatorDbContext _dbContext;
-  public GetCongestionTaxQueryHandler(CongestionTaxCalculatorDbContext congestionTaxCalculatorDbContext)
+  protected readonly IConfiguration _configuration;
+  public GetCongestionTaxQueryHandler(CongestionTaxCalculatorDbContext congestionTaxCalculatorDbContext, IConfiguration configuration)
   {
     _dbContext = congestionTaxCalculatorDbContext;
+    _configuration = configuration;
   }
 
-  public async Task<List<(DateOnly, int)>> Handle(GetCongestionTaxQuery request, CancellationToken cancellationToken)
+  public async Task<GetCongestionTaxResponse> Handle(GetCongestionTaxQuery request, CancellationToken cancellationToken)
   {
+    var getCongestionTaxResponse = new GetCongestionTaxResponse();
     var isTollFreeVehicle = Enum.TryParse(request.VehicleType, true, out TollFreeVehicles vehicle);
-    var result = new List<(DateOnly, int)>();
-    if (isTollFreeVehicle) return result;
-
-    var dateGroups = request.Dates.GroupBy(d => d.Date.Day).Select(grp => grp.ToList()).Select(x => x.OrderBy(x => x)).ToList();
-
-    foreach (var dateGroup in dateGroups)
+    if (isTollFreeVehicle)
     {
-      var prevDate = DateTime.MinValue;
-      var prevTollFee = 0;
-      var stillInTimeSpan = false;
+      getCongestionTaxResponse.VehicleType = request.VehicleType;
+      getCongestionTaxResponse.Total = 0;
+      return getCongestionTaxResponse;
+    }
+
+    getCongestionTaxResponse.VehicleType = request.VehicleType;
+    var singleChargeRuleLimit = int.Parse(_configuration["SingleChargeRuleLimit"]);
+    var dateGroups = request.Dates.GroupBy(d => d.Date.Day).Select(grp => grp.ToList()).Select(x => x.OrderBy(x => x).ToList()).ToList();
+
+    var total = 0;
+    foreach (var dateGroupByDay in dateGroups)
+    {
+      var taxDate = dateGroupByDay.First().Date;
+      var timeSpans = dateGroupByDay.GroupWhile((groupDate, current) => (current - groupDate).TotalSeconds < singleChargeRuleLimit);
       var totalForDay = 0;
-      var amountList = new List<int>();
 
-      foreach (var date in dateGroup)
+      foreach (var dates in timeSpans)
       {
-        stillInTimeSpan = (date - prevDate).TotalMinutes <= 60;
-
-        var tollFeeForOneEntry = GetTollFeeForOneEntry(date);
-
-        if (stillInTimeSpan)
-        {
-          amountList.Add(prevTollFee);
-          if (tollFeeForOneEntry >= amountList.Max())
-          {
-            totalForDay -= prevTollFee;
-            totalForDay += tollFeeForOneEntry;
-          }
-        }
-        else
-        {
-          totalForDay += tollFeeForOneEntry;
-          amountList.Clear();
-        }
-
-        prevDate = date;
-        prevTollFee = tollFeeForOneEntry;
+        totalForDay += dates.Select(x => GetTollFeeForOneEntry(x)).Max();
       }
       totalForDay = totalForDay <= 60 ? totalForDay : 60;
-      result.Add((DateOnly.FromDateTime(dateGroup.First()), totalForDay));
+
+      getCongestionTaxResponse.Taxes.Add(taxDate, totalForDay);
+      total += totalForDay;
+      getCongestionTaxResponse.Total = total;
     }
-    return await Task.FromResult(result);
+    return await Task.FromResult(getCongestionTaxResponse);
   }
   private int GetTollFeeForOneEntry(DateTime accessTime)
   {
