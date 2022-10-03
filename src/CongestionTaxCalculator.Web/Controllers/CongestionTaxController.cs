@@ -1,5 +1,5 @@
-﻿using CongestionTaxCalculator.Application;
-using CongestionTaxCalculator.Application.Queries;
+﻿using CongestionTaxCalculator.Application.Queries;
+using CongestionTaxCalculator.Application.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Xml.Linq;

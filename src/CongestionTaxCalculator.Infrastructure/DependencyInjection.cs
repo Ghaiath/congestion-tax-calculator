@@ -9,7 +9,6 @@ public static class DependencyInjection
   public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
   {
     services.AddSingleton<IMongoDbConnection>(MongoDbConnection.FromConnectionString(configuration.GetConnectionString("CongestionTaxCalculatorConnection")));
-    Console.WriteLine(configuration.GetConnectionString("CongestionTaxCalculatorConnection"));
     services.AddSingleton<CongestionTaxCalculatorDbContext>();
   }
 }
